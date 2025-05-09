@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 type Bag = {
   title: string;
@@ -9,7 +9,7 @@ type Bag = {
   url: string;
 };
 
-export default function ResultPage() {
+function ResultContent() {
   const params = useSearchParams();
   const id = params.get("id");
   const [bag, setBag] = useState<Bag | null>(null);
@@ -40,5 +40,13 @@ export default function ResultPage() {
         </a>
       </div>
     </div>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultContent />
+    </Suspense>
   );
 }
