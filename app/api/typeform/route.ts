@@ -11,6 +11,8 @@ type TypeformAnswer = {
 };
 
 export async function POST(request: Request) {
+  console.log("POST request received");
+
   const body = await request.json();
   const { form_response } = body;
   const answers: TypeformAnswer[] = form_response?.answers || [];
@@ -33,6 +35,7 @@ export async function POST(request: Request) {
   };
 
   const bags = await scrapeFashionphile();
+  console.log('Scraped bags:', bags);
   const recommendation = recommendBag(input, bags);
 
   const id = randomUUID();
