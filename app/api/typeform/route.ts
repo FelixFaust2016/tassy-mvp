@@ -40,6 +40,9 @@ export async function POST(request: Request) {
 
   console.log("User input:", input);
   console.log("Recommended bag:", recommendation);
+  console.log("id", id);
 
-  return NextResponse.json({ id, recommended: recommendation });
+  const redirectUrl = `https://tassy-mvp.vercel.app/result?id=${id}`;
+
+  return NextResponse.redirect(redirectUrl);
 }
